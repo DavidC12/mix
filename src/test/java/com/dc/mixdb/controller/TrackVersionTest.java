@@ -11,18 +11,10 @@ import org.springframework.web.client.RestTemplate;
 import com.dc.mixdb.model.TrackVersion;
 
 public class TrackVersionTest {
-	
-//	@Test(timeout=3000)
-//	public void testCreateTrack() {
-//		
-//		RestTemplate restTemplate = new RestTemplate();
-//		
-//		//Set up model
-//		
-//		//Call service to insert model
-//		
-//	}
-	
+
+	/**
+	 * Test logic to retrieve a list of tracks
+	 */
 	@Test(timeout=3000)
 	public void testGetTracks() {
 		
