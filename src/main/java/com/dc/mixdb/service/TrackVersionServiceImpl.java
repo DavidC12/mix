@@ -25,4 +25,9 @@ public class TrackVersionServiceImpl implements TrackVersionService {
 		return trackVersionRepository.getTrackVersions();
 	}
 
+	@Override
+	public TrackVersion createTrackVersion(TrackVersion track) {
+		return trackVersionRepository.createTrackVersion(track);
+	}
+
 }

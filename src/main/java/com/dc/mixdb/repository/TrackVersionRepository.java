@@ -8,4 +8,6 @@ public interface TrackVersionRepository {
 	
 	List<TrackVersion> getTrackVersions();
 	
+	TrackVersion createTrackVersion(TrackVersion track);
+	
 }

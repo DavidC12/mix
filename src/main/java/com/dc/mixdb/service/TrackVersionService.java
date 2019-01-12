@@ -7,5 +7,7 @@ import com.dc.mixdb.model.TrackVersion;
 public interface TrackVersionService {
 	
 	List<TrackVersion> getTrackVersions();
+	
+	TrackVersion createTrackVersion(TrackVersion track);
 
 }

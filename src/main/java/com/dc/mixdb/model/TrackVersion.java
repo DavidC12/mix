@@ -1,23 +1,14 @@
 package com.dc.mixdb.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
- * SELECT `track_version`.`idtrack_version`,
-    `track_version`.`create_timestamp`,
-    `track_version`.`update_timestamp`,
-    `track_version`.`create_user`,
-    `track_version`.`update_user`,
-    `track_version`.`artist_name`,
-    `track_version`.`song_name`,
-    `track_version`.`remix_name`,
-    `track_version`.`beat_mixable`,
-    `track_version`.`bpm_start`,
-    `track_version`.`bpm_end`,
-    `track_version`.`key_start`,
-    `track_version`.`key_end`,
-    `track_version`.`comment`
-FROM `mixdb`.`track_version`;
+ * Model for trackVersion
+ * 
+ * A track version is a track that exists irrespective of how it's packaged 
+ * (ie. on an album, as a single, as part of a compilation, etc)
+ * 
  * @author d_clo
  *
  */
@@ -35,6 +26,31 @@ public class TrackVersion {
 	private String keyStart;
 	private String keyEnd;
 	private String comment;
+	private Integer rating;
+	private Date ratingDate;
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder().
+				append("Artist - ").append(this.getArtistName()).append(";").
+				append("Song - ").append(this.getSongName()).append(";").
+				append("Remix - ").append(this.getRemixName()).append(";").
+				append("BeatMixable - ").append(this.getBeatMixable()).append(";").
+				append("BPM (ST) - ").append(this.getBpmStart()).append(";").
+				append("BPM (EN) - ").append(this.getBpmEnd()).append(";").
+				append("KEY (ST) - ").append(this.getKeyStart()).append(";").
+				append("KEY (EN) - ").append(this.getKeyEnd()).append(";").
+				append("Create User - ").append(this.getCreateUser()).append(";").
+				append("Create Timestamp - ").append(this.getCreateTimestamp()).append(";").
+				append("Update User - ").append(this.getUpdateUser()).append(";").
+				append("Update Timestamp - ").append(this.getUpdateTimestamp()).append(";").
+				append("Rating - ").append(this.getRating()).append(";").
+				append("Rating Date - ").append(this.getRatingDate()).append(";").
+				append("Comment - ").append(this.getComment()).append(";");
+		return sb.toString();
+	}
+	
+	//All of the getters and setters......
 	public Timestamp getCreateTimestamp() {
 		return createTimestamp;
 	}
@@ -113,23 +129,17 @@ public class TrackVersion {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder().
-				append("Artist - ").append(this.getArtistName()).append(";").
-				append("Song - ").append(this.getSongName()).append(";").
-				append("Remix - ").append(this.getRemixName()).append(";").
-				append("BeatMixable - ").append(this.getBeatMixable()).append(";").
-				append("BPM (ST) - ").append(this.getBpmStart()).append(";").
-				append("BPM (EN) - ").append(this.getBpmEnd()).append(";").
-				append("KEY (ST) - ").append(this.getKeyStart()).append(";").
-				append("KEY (EN) - ").append(this.getKeyEnd()).append(";").
-				append("Create User - ").append(this.getCreateUser()).append(";").
-				append("Create Timestamp - ").append(this.getCreateTimestamp()).append(";").
-				append("Update User - ").append(this.getUpdateUser()).append(";").
-				append("Update Timestamp - ").append(this.getUpdateTimestamp()).append(";").
-				append("Comment - ").append(this.getComment()).append(";");
-		return sb.toString();
+	public Integer getRating() {
+		return rating;
+	}
+	public void setRating(Integer rating) {
+		this.rating = rating;
+	}
+	public Date getRatingDate() {
+		return ratingDate;
+	}
+	public void setRatingDate(Date ratingDate) {
+		this.ratingDate = ratingDate;
 	}
 	
 	
