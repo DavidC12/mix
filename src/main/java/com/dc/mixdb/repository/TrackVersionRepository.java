@@ -10,4 +10,5 @@ public interface TrackVersionRepository {
 	
 	TrackVersion createTrackVersion(TrackVersion track);
 	
+	TrackVersion getTrackVersion(Integer id);
 }

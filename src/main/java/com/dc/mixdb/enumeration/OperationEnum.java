@@ -6,6 +6,7 @@ package com.dc.mixdb.enumeration;
  */
 public enum OperationEnum {
 	GET_TRACK_VERSIONS("trackVersions"),
+	GET_TRACK_VERSION("trackVersion"),
 	CREATE_TRACK("createTrack");
 
 	private String operationName;

@@ -15,10 +15,9 @@ import org.springframework.stereotype.Repository;
 import com.dc.mixdb.model.TrackVersion;
 import com.dc.mixdb.repository.util.TrackVersionRowMapper;
 
-
 @Repository("trackVersionRepository")
 public class TrackVersionRepositoryImpl implements TrackVersionRepository {
-	
+
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
@@ -29,9 +28,20 @@ public class TrackVersionRepositoryImpl implements TrackVersionRepository {
 	@Override
 	public List<TrackVersion> getTrackVersions() {
 
-		String query = "SELECT idtrack_version, create_timestamp, update_timestamp, create_user, update_user, artist_name, song_name, remix_name, beat_mixable, bpm_start, bpm_end, key_start, key_end, rating, rating_date, comment FROM mixdb.track_version; "; 
+		String query = "SELECT idtrack_version, create_timestamp, update_timestamp, create_user, update_user, artist_name, song_name, remix_name, beat_mixable, bpm_start, bpm_end, key_start, key_end, rating, rating_date, comment FROM mixdb.track_version; ";
 		List<TrackVersion> trackVersions = jdbcTemplate.query(query, new TrackVersionRowMapper());
 		return trackVersions;
+	}
+
+	/**
+	 * Get a single track
+	 */
+	@Override
+	public TrackVersion getTrackVersion(Integer id) {
+
+		String query = "SELECT idtrack_version, create_timestamp, update_timestamp, create_user, update_user, artist_name, song_name, remix_name, beat_mixable, bpm_start, bpm_end, key_start, key_end, rating, rating_date, comment FROM mixdb.track_version where idtrack_version = ?";
+		TrackVersion trackVersion = jdbcTemplate.queryForObject(query, new TrackVersionRowMapper(), id);
+		return trackVersion;
 	}
 
 	/**
@@ -41,33 +51,18 @@ public class TrackVersionRepositoryImpl implements TrackVersionRepository {
 	public TrackVersion createTrackVersion(TrackVersion track) {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcTemplate.update(new PreparedStatementCreator() {
-			
+
 			@Override
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 
-				StringBuilder sql = new StringBuilder().
-						append("insert into mixdb.track_version ").
-						append("(").
-						append("create_timestamp,").
-						append("update_timestamp,").
-						append("create_user,").
-						append("update_user,").
-						append("artist_name,").
-						append("song_name,").
-						append("remix_name,").
-						append("beat_mixable,").
-						append("bpm_start,").
-						append("bpm_end,").
-						append("key_start,").
-						append("key_end,").
-						append("comment,").
-						append("rating,").
-						append("rating_date").
-						append(")").
-						append(" values ").
-						append("(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+				StringBuilder sql = new StringBuilder().append("insert into mixdb.track_version ").append("(")
+						.append("create_timestamp,").append("update_timestamp,").append("create_user,")
+						.append("update_user,").append("artist_name,").append("song_name,").append("remix_name,")
+						.append("beat_mixable,").append("bpm_start,").append("bpm_end,").append("key_start,")
+						.append("key_end,").append("comment,").append("rating,").append("rating_date").append(")")
+						.append(" values ").append("(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-				PreparedStatement ps  = con.prepareStatement(sql.toString(), new String[] {"idtrack_version"});
+				PreparedStatement ps = con.prepareStatement(sql.toString(), new String[] { "idtrack_version" });
 
 				ps.setTimestamp(1, track.getCreateTimestamp());
 				ps.setTimestamp(2, track.getUpdateTimestamp());
@@ -84,17 +79,17 @@ public class TrackVersionRepositoryImpl implements TrackVersionRepository {
 				ps.setString(13, track.getComment());
 				ps.setInt(14, track.getRating());
 				ps.setDate(15, track.getRatingDate());
-				
+
 				return ps;
-				
+
 			}
 		}, keyHolder);
-		
+
 		Number id = keyHolder.getKey();
-		
-		//TODO
-		//return getTrackVersion(ie.intValue();
-		return (track);
-		
+
+		// TODO
+		// return getTrackVersion(ie.intValue();
+		return (getTrackVersion(id.intValue()));
+
 	}
 }

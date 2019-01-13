@@ -1,5 +1,9 @@
 package com.dc.mixdb.controller;
 
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
@@ -69,32 +73,4 @@ public class TrackVersionTest {
 		track.setRemixName("ALBUM");
 		track = restTemplate.postForObject(url, track, TrackVersion.class);
 	}
-
-	/*
-	 * 	@Test(timeout=3000)
-	public void testCreateRide() {
-		RestTemplate restTemplate = new RestTemplate();
-		Ride ride = new Ride();
-		ride.setName("Sagebush Trail");
-		ride.setDuration(33);
-		
-		ride = restTemplate.postForObject("http://localhost:8080/ride_tracker/ride", ride, Ride.class);
-	}
-	
-	@Test(timeout=3000)
-	public void testGetRides() {
-		RestTemplate restTemplate = new RestTemplate();
-
-		ResponseEntity<List<Ride>> ridesResponse = restTemplate.exchange(
-				"http://localhost:8080/ride_tracker/rides", HttpMethod.GET,
-				null, new ParameterizedTypeReference<List<Ride>>() {
-				});
-		List<Ride> rides = ridesResponse.getBody();
-
-		for (Ride ride : rides) {
-			System.out.println("Ride name: " + ride.getName());
-		}
-	}
-	 */
-
 }
