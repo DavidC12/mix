@@ -50,4 +50,8 @@ SELECT idtrack_version,
 FROM mixdb.track_version;
 
 -- delete from mixdb.track_version where idtrack_version > 1;
-select * from mixdb.track_version;    
+SELECT *
+FROM `ride_tracker`.`ride`;
+
+
+    
