@@ -11,4 +11,8 @@ public interface TrackVersionRepository {
 	TrackVersion createTrackVersion(TrackVersion track);
 	
 	TrackVersion getTrackVersion(Integer id);
+
+	TrackVersion updateTrackVersion(TrackVersion track);
+
+	List<Object[]> batch(List<Object[]> idList);
 }

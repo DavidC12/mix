@@ -7,7 +7,8 @@ package com.dc.mixdb.enumeration;
 public enum OperationEnum {
 	GET_TRACK_VERSIONS("trackVersions"),
 	GET_TRACK_VERSION("trackVersion"),
-	CREATE_TRACK("createTrack");
+	CREATE_TRACK("createTrack"),
+	BATCH("batch");
 
 	private String operationName;
 	private OperationEnum(String operationName) {

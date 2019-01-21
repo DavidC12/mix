@@ -30,4 +30,19 @@ public class TrackVersionServiceImpl implements TrackVersionService {
 		return trackVersionRepository.createTrackVersion(track);
 	}
 
+	@Override
+	public TrackVersion getTrackVersion(Integer id) {
+		return trackVersionRepository.getTrackVersion(id);
+	}
+
+	@Override
+	public TrackVersion updateTrackVersion(TrackVersion track) {
+		return trackVersionRepository.updateTrackVersion(track);
+	}
+
+	@Override
+	public List<Object[]> batch(List<Object[]> idList) {
+		return trackVersionRepository.batch(idList);
+	}
+
 }

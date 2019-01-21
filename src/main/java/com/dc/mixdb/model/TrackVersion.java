@@ -13,6 +13,7 @@ import java.sql.Timestamp;
  *
  */
 public class TrackVersion {
+	private Integer id;
 	private Timestamp createTimestamp;
 	private Timestamp updateTimestamp;
 	private String createUser;
@@ -32,6 +33,7 @@ public class TrackVersion {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder().
+				append("ID - ").append(this.getId()).append(";").
 				append("Artist - ").append(this.getArtistName()).append(";").
 				append("Song - ").append(this.getSongName()).append(";").
 				append("Remix - ").append(this.getRemixName()).append(";").
@@ -141,6 +143,10 @@ public class TrackVersion {
 	public void setRatingDate(Date ratingDate) {
 		this.ratingDate = ratingDate;
 	}
-	
-	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 }

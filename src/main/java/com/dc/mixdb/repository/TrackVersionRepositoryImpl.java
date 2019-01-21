@@ -3,6 +3,7 @@ package com.dc.mixdb.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,9 +88,77 @@ public class TrackVersionRepositoryImpl implements TrackVersionRepository {
 
 		Number id = keyHolder.getKey();
 
-		// TODO
-		// return getTrackVersion(ie.intValue();
 		return (getTrackVersion(id.intValue()));
 
+	}
+
+	@Override
+	public TrackVersion updateTrackVersion(TrackVersion track) {
+		System.err.println("Performing update for track " + track);
+		
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				StringBuffer  sql = new StringBuffer();
+				sql.append("UPDATE mixdb.track_version ");
+				sql.append("SET ");
+				sql.append("create_timestamp = ?,");
+				sql.append("update_timestamp = ?, ");
+				sql.append("create_user = ?,");
+				sql.append("update_user = ?,");
+				sql.append("artist_name = ?,");
+				sql.append("song_name = ?,");
+				sql.append("remix_name = ?,");
+				sql.append("beat_mixable = ?,");
+				sql.append("bpm_start = ?,");
+				sql.append("bpm_end = ?, ");
+				sql.append("key_start = ?,");
+				sql.append("key_end = ?,");
+				sql.append("rating = ?,");
+				sql.append("rating_date = ?,");
+				sql.append("comment = ? ");
+				sql.append("WHERE idtrack_version = ?");
+				
+				PreparedStatement ps = con.prepareStatement(sql.toString());
+				
+				ps.setTimestamp(1, track.getCreateTimestamp());
+				ps.setTimestamp(2, track.getUpdateTimestamp());
+				ps.setString(3, track.getCreateUser());
+				ps.setString(4, track.getUpdateUser());
+				ps.setString(5, track.getArtistName());
+				ps.setString(6, track.getSongName());
+				ps.setString(7, track.getRemixName());
+				ps.setInt(8, track.getBeatMixable());
+				ps.setInt(9, track.getBpmStart());
+				ps.setInt(10, track.getBpmEnd());
+				ps.setString(11, track.getKeyStart());
+				ps.setString(12, track.getKeyEnd());
+				ps.setInt(13, track.getRating());
+				
+				if (track.getRatingDate() != null) {
+					ps.setDate(14, track.getRatingDate());
+				} else {
+					ps.setNull(14,Types.DATE);
+				}
+				
+				ps.setString(15, track.getComment());
+				ps.setInt(16, track.getId());
+				
+				return ps;
+			}
+		});
+		
+		return (track);
+	}
+
+	/**
+	 * Update all of the id's update dates passed in.
+	 */
+	@Override
+	public List<Object[]> batch(List<Object[]> idList) {
+		
+		jdbcTemplate.batchUpdate("UPDATE mixdb.track_version set update_timestamp = ? where idtrack_version = ?",idList);
+		return null;
 	}
 }

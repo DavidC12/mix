@@ -27,6 +27,7 @@ public class TrackVersionRowMapper implements RowMapper<TrackVersion> {
 		trackVersion.setComment(rs.getString("comment"));
 		trackVersion.setRating(rs.getInt("rating"));
 		trackVersion.setRatingDate(rs.getDate("rating_date"));
+		trackVersion.setId(rs.getInt("idtrack_version"));
 		return trackVersion;
 	}
 }

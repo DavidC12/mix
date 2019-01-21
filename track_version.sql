@@ -53,5 +53,25 @@ FROM mixdb.track_version;
 SELECT *
 FROM `ride_tracker`.`ride`;
 
+UPDATE `mixdb`.`track_version`
+SET
+`idtrack_version` = <{idtrack_version: }>,
+`create_timestamp` = <{create_timestamp: CURRENT_TIMESTAMP}>,
+`update_timestamp` = <{update_timestamp: CURRENT_TIMESTAMP}>,
+`create_user` = <{create_user: SQL}>,
+`update_user` = <{update_user: SQL}>,
+`artist_name` = <{artist_name: }>,
+`song_name` = <{song_name: }>,
+`remix_name` = <{remix_name: ALBUM}>,
+`beat_mixable` = <{beat_mixable: 0}>,
+`bpm_start` = <{bpm_start: }>,
+`bpm_end` = <{bpm_end: }>,
+`key_start` = <{key_start: }>,
+`key_end` = <{key_end: }>,
+`rating` = <{rating: }>,
+`rating_date` = <{rating_date: }>,
+`comment` = <{comment: }>
+WHERE `idtrack_version` = <{expr}>;
 
+delete mixdb.track_version where idtrack_version > 7;
     
