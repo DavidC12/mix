@@ -161,4 +161,10 @@ public class TrackVersionRepositoryImpl implements TrackVersionRepository {
 		jdbcTemplate.batchUpdate("UPDATE mixdb.track_version set update_timestamp = ? where idtrack_version = ?",idList);
 		return null;
 	}
+	
+	@Override
+	public void deleteTrack(Integer id) {
+		jdbcTemplate.update("delete from mixdb.track_version where idtrack_version = ?", id);
+	}
+	
 }

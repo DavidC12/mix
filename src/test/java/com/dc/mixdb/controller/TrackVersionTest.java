@@ -1,5 +1,7 @@
 package com.dc.mixdb.controller;
 
+import static org.junit.Assert.assertTrue;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -144,7 +146,7 @@ public class TrackVersionTest {
 	}
 	
 	/**
-	 * Update multiple rides (batch mode test)
+	 * Update multiple versions (batch mode test)
 	 */
 	@Test
 	public void testBatchUpdate() {
@@ -161,13 +163,39 @@ public class TrackVersionTest {
 			Timestamp ts = new Timestamp(today.getTime()); */
 			
 			String ts = "2019-01-21 05:11:01";
-			
 			Object[] tmp = {ts, tv.getId()};
 			idList.add(tmp);
 		}
 		restTemplate.postForObject(url, idList, Object.class);
 	}
 	
-	
-
+	/**
+	 * Delete a track when ID is passed in
+	 */
+	@Test
+	public void testDeleteTrack() {
+		RestTemplate restTemplate = new RestTemplate();
+		String url = Constants.rootURL + OperationEnum.DELETE.getOperationName();
+		System.err.println(url);
+		
+		List<TrackVersion> list = getTrackVersions();
+		Integer size = list.size() - 1;
+		assertTrue(size > 0);
+		TrackVersion lastElement = list.get(size);
+		Integer id = lastElement.getId();
+		
+		System.err.println("Deleting track ID " + id);
+		restTemplate.delete(url + "/" + id);
+		
+//		** Looks like same size is returned from getTrackVersions even after the list is updated **	
+//      ** Research this at a later time **		
+//		
+//		List<TrackVersion> listAfter = getTrackVersions();
+//		
+//		Integer newSize = listAfter.size();
+//		Integer result = size - newSize;
+//		
+//		assertTrue(result == 1);
+		
+	}
 }

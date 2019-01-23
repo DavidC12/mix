@@ -52,4 +52,10 @@ public class TrackVersionController {
 	public @ResponseBody List<Object[]> batch(@RequestBody List<Object[]> idList) {
 		return trackVersionService.batch(idList);
 	}
+	
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+	public @ResponseBody Object delete(@PathVariable(value="id") Integer id) {
+		trackVersionService.deleteTrack(id);
+		return null;
+	}
 }

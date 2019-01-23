@@ -44,5 +44,10 @@ public class TrackVersionServiceImpl implements TrackVersionService {
 	public List<Object[]> batch(List<Object[]> idList) {
 		return trackVersionRepository.batch(idList);
 	}
+	
+	@Override
+	public void deleteTrack(Integer id) {
+		trackVersionRepository.deleteTrack(id);
+	}
 
 }

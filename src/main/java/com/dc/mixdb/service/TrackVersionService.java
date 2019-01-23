@@ -16,4 +16,6 @@ public interface TrackVersionService {
 
 	List<Object[]> batch(List<Object[]> idList);
 
+	void deleteTrack(Integer id);
+
 }

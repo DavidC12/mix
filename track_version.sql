@@ -73,5 +73,5 @@ SET
 `comment` = <{comment: }>
 WHERE `idtrack_version` = <{expr}>;
 
-delete mixdb.track_version where idtrack_version > 7;
+-- delete mixdb.track_version where idtrack_version > 7;
     

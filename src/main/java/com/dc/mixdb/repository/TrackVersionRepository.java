@@ -15,4 +15,6 @@ public interface TrackVersionRepository {
 	TrackVersion updateTrackVersion(TrackVersion track);
 
 	List<Object[]> batch(List<Object[]> idList);
+
+	void deleteTrack(Integer id);
 }

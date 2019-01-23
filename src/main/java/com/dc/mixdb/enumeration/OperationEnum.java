@@ -8,7 +8,8 @@ public enum OperationEnum {
 	GET_TRACK_VERSIONS("trackVersions"),
 	GET_TRACK_VERSION("trackVersion"),
 	CREATE_TRACK("createTrack"),
-	BATCH("batch");
+	BATCH("batch"), 
+	DELETE("delete");
 
 	private String operationName;
 	private OperationEnum(String operationName) {
