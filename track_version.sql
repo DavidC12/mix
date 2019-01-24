@@ -1,7 +1,9 @@
 select * from mixdb.track_version;
+-- delete from mixdb.track_version where idtrack_version = 13;
 insert into mixdb.track_version
 (
-	create_timestamp,
+	idtrack_version,
+    create_timestamp,
     update_timestamp,
     create_user,
     update_user,
@@ -13,9 +15,12 @@ insert into mixdb.track_version
     bpm_end,
     key_start,
     key_end,
+    rating,
+    rating_date,
     comment
 ) values
 (
+	1,
 	current_timestamp,
     current_timestamp,
     'TEST',
@@ -28,6 +33,8 @@ insert into mixdb.track_version
     120,
     'E',
     'E#',
+    3,
+    current_date,
     'Welcome to the bobs bigboy remix'
 );
 

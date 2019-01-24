@@ -3,7 +3,9 @@ package com.dc.mixdb.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dc.mixdb.model.TrackVersion;
 import com.dc.mixdb.repository.TrackVersionRepository;
@@ -46,8 +48,15 @@ public class TrackVersionServiceImpl implements TrackVersionService {
 	}
 	
 	@Override
+	@Transactional
 	public void deleteTrack(Integer id) {
 		trackVersionRepository.deleteTrack(id);
+		
+		//Some code to force a runtime exception if attempting to delete the first record
+		if (id == 1) {
+			System.err.println("Our weak exception testing effort....");
+			throw new DataAccessException("You cannot delete record with ID of 1") {};
+		}
 	}
 
 }
