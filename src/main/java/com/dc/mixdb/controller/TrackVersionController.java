@@ -2,9 +2,13 @@ package com.dc.mixdb.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ServiceConfigurationError;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dc.mixdb.model.TrackVersion;
 import com.dc.mixdb.repository.util.TrackVersionUpdateParameters;
 import com.dc.mixdb.service.TrackVersionService;
+import com.dc.mixdb.util.ServiceError;
 
 /**
  * This class contains all of our rest mappings
@@ -57,5 +62,11 @@ public class TrackVersionController {
 	public @ResponseBody Object delete(@PathVariable(value="id") Integer id) {
 		trackVersionService.deleteTrack(id);
 		return null;
+	}
+	
+	@ExceptionHandler(RuntimeException.class)
+	public ResponseEntity<ServiceError>  handle(RuntimeException ex) {
+		ServiceError error = new ServiceError(HttpStatus.OK.value(), ex.getMessage());
+		return new ResponseEntity<>(error, HttpStatus.OK);
 	}
 }
